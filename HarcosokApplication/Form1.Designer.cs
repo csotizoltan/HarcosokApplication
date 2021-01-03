@@ -39,7 +39,7 @@
             this.hasznaloComboBox = new System.Windows.Forms.ComboBox();
             this.kepessegNeveTextBox = new System.Windows.Forms.TextBox();
             this.labelKepessegNev = new System.Windows.Forms.Label();
-            this.button = new System.Windows.Forms.Button();
+            this.buttonKepessegLetrehozasa = new System.Windows.Forms.Button();
             this.leirasTextBox = new System.Windows.Forms.TextBox();
             this.labelKepessegLeiras = new System.Windows.Forms.Label();
             this.labelHarcosok = new System.Windows.Forms.Label();
@@ -60,6 +60,7 @@
             this.buttonHarcosLetrehozasa.TabIndex = 0;
             this.buttonHarcosLetrehozasa.Text = "Létrehozás";
             this.buttonHarcosLetrehozasa.UseVisualStyleBackColor = true;
+            this.buttonHarcosLetrehozasa.Click += new System.EventHandler(this.buttonHarcosLetrehozasa_Click);
             // 
             // harcosNeveTextBox
             // 
@@ -67,6 +68,7 @@
             this.harcosNeveTextBox.Name = "harcosNeveTextBox";
             this.harcosNeveTextBox.Size = new System.Drawing.Size(147, 22);
             this.harcosNeveTextBox.TabIndex = 1;
+            this.harcosNeveTextBox.TextChanged += new System.EventHandler(this.harcosNeveTextBox_TextChanged);
             // 
             // labelHarcosLetrehozasa
             // 
@@ -127,6 +129,7 @@
             this.hasznaloComboBox.Name = "hasznaloComboBox";
             this.hasznaloComboBox.Size = new System.Drawing.Size(243, 24);
             this.hasznaloComboBox.TabIndex = 8;
+            this.hasznaloComboBox.SelectedIndexChanged += new System.EventHandler(this.hasznaloComboBox_SelectedIndexChanged);
             // 
             // kepessegNeveTextBox
             // 
@@ -144,14 +147,15 @@
             this.labelKepessegNev.TabIndex = 10;
             this.labelKepessegNev.Text = "Név:";
             // 
-            // button
+            // buttonKepessegLetrehozasa
             // 
-            this.button.Location = new System.Drawing.Point(27, 214);
-            this.button.Name = "button";
-            this.button.Size = new System.Drawing.Size(114, 25);
-            this.button.TabIndex = 11;
-            this.button.Text = "Hozzáad";
-            this.button.UseVisualStyleBackColor = true;
+            this.buttonKepessegLetrehozasa.Location = new System.Drawing.Point(27, 214);
+            this.buttonKepessegLetrehozasa.Name = "buttonKepessegLetrehozasa";
+            this.buttonKepessegLetrehozasa.Size = new System.Drawing.Size(114, 25);
+            this.buttonKepessegLetrehozasa.TabIndex = 11;
+            this.buttonKepessegLetrehozasa.Text = "Hozzáad";
+            this.buttonKepessegLetrehozasa.UseVisualStyleBackColor = true;
+            this.buttonKepessegLetrehozasa.Click += new System.EventHandler(this.buttonKepessegLetrehozasa_Click);
             // 
             // leirasTextBox
             // 
@@ -187,6 +191,7 @@
             this.harcosokListBox.Name = "harcosokListBox";
             this.harcosokListBox.Size = new System.Drawing.Size(150, 324);
             this.harcosokListBox.TabIndex = 15;
+            this.harcosokListBox.SelectedIndexChanged += new System.EventHandler(this.harcosokListBox_SelectedIndexChanged);
             // 
             // labelKepessegei
             // 
@@ -231,6 +236,7 @@
             this.buttonModisit.TabIndex = 20;
             this.buttonModisit.Text = "Módosít";
             this.buttonModisit.UseVisualStyleBackColor = true;
+            this.buttonModisit.Click += new System.EventHandler(this.buttonKepessegLeirasModosit_Click);
             // 
             // buttonTorol
             // 
@@ -240,6 +246,7 @@
             this.buttonTorol.TabIndex = 21;
             this.buttonTorol.Text = "Törlés";
             this.buttonTorol.UseVisualStyleBackColor = true;
+            this.buttonTorol.Click += new System.EventHandler(this.buttonKepessegTorol_Click);
             // 
             // Form1
             // 
@@ -256,7 +263,7 @@
             this.Controls.Add(this.labelHarcosok);
             this.Controls.Add(this.labelKepessegLeiras);
             this.Controls.Add(this.leirasTextBox);
-            this.Controls.Add(this.button);
+            this.Controls.Add(this.buttonKepessegLetrehozasa);
             this.Controls.Add(this.labelKepessegNev);
             this.Controls.Add(this.kepessegNeveTextBox);
             this.Controls.Add(this.hasznaloComboBox);
@@ -270,6 +277,7 @@
             this.Controls.Add(this.buttonHarcosLetrehozasa);
             this.Name = "Form1";
             this.Text = "Harcosok";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -289,7 +297,7 @@
         private System.Windows.Forms.ComboBox hasznaloComboBox;
         private System.Windows.Forms.TextBox kepessegNeveTextBox;
         private System.Windows.Forms.Label labelKepessegNev;
-        private System.Windows.Forms.Button button;
+        private System.Windows.Forms.Button buttonKepessegLetrehozasa;
         private System.Windows.Forms.TextBox leirasTextBox;
         private System.Windows.Forms.Label labelKepessegLeiras;
         private System.Windows.Forms.Label labelHarcosok;

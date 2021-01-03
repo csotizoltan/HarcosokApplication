@@ -48,8 +48,8 @@
             this.kepessegekListBox = new System.Windows.Forms.ListBox();
             this.labelKepessegLeirasa = new System.Windows.Forms.Label();
             this.kepessegLeirasaTextBox = new System.Windows.Forms.TextBox();
-            this.buttonModisit = new System.Windows.Forms.Button();
-            this.buttonTorol = new System.Windows.Forms.Button();
+            this.buttonKepessegLeirasModosit = new System.Windows.Forms.Button();
+            this.buttonKepessegTorol = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonHarcosLetrehozasa
@@ -210,6 +210,7 @@
             this.kepessegekListBox.Name = "kepessegekListBox";
             this.kepessegekListBox.Size = new System.Drawing.Size(150, 324);
             this.kepessegekListBox.TabIndex = 17;
+            this.kepessegekListBox.SelectedIndexChanged += new System.EventHandler(this.kepessegekListBox_SelectedIndexChanged);
             // 
             // labelKepessegLeirasa
             // 
@@ -228,33 +229,33 @@
             this.kepessegLeirasaTextBox.Size = new System.Drawing.Size(251, 104);
             this.kepessegLeirasaTextBox.TabIndex = 19;
             // 
-            // buttonModisit
+            // buttonKepessegLeirasModosit
             // 
-            this.buttonModisit.Location = new System.Drawing.Point(580, 421);
-            this.buttonModisit.Name = "buttonModisit";
-            this.buttonModisit.Size = new System.Drawing.Size(100, 25);
-            this.buttonModisit.TabIndex = 20;
-            this.buttonModisit.Text = "Módosít";
-            this.buttonModisit.UseVisualStyleBackColor = true;
-            this.buttonModisit.Click += new System.EventHandler(this.buttonKepessegLeirasModosit_Click);
+            this.buttonKepessegLeirasModosit.Location = new System.Drawing.Point(580, 421);
+            this.buttonKepessegLeirasModosit.Name = "buttonKepessegLeirasModosit";
+            this.buttonKepessegLeirasModosit.Size = new System.Drawing.Size(100, 25);
+            this.buttonKepessegLeirasModosit.TabIndex = 20;
+            this.buttonKepessegLeirasModosit.Text = "Módosít";
+            this.buttonKepessegLeirasModosit.UseVisualStyleBackColor = true;
+            this.buttonKepessegLeirasModosit.Click += new System.EventHandler(this.buttonKepessegLeirasModosit_Click);
             // 
-            // buttonTorol
+            // buttonKepessegTorol
             // 
-            this.buttonTorol.Location = new System.Drawing.Point(221, 644);
-            this.buttonTorol.Name = "buttonTorol";
-            this.buttonTorol.Size = new System.Drawing.Size(100, 25);
-            this.buttonTorol.TabIndex = 21;
-            this.buttonTorol.Text = "Törlés";
-            this.buttonTorol.UseVisualStyleBackColor = true;
-            this.buttonTorol.Click += new System.EventHandler(this.buttonKepessegTorol_Click);
+            this.buttonKepessegTorol.Location = new System.Drawing.Point(221, 644);
+            this.buttonKepessegTorol.Name = "buttonKepessegTorol";
+            this.buttonKepessegTorol.Size = new System.Drawing.Size(100, 25);
+            this.buttonKepessegTorol.TabIndex = 21;
+            this.buttonKepessegTorol.Text = "Törlés";
+            this.buttonKepessegTorol.UseVisualStyleBackColor = true;
+            this.buttonKepessegTorol.Click += new System.EventHandler(this.buttonKepessegTorol_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(712, 682);
-            this.Controls.Add(this.buttonTorol);
-            this.Controls.Add(this.buttonModisit);
+            this.Controls.Add(this.buttonKepessegTorol);
+            this.Controls.Add(this.buttonKepessegLeirasModosit);
             this.Controls.Add(this.kepessegLeirasaTextBox);
             this.Controls.Add(this.labelKepessegLeirasa);
             this.Controls.Add(this.kepessegekListBox);
@@ -306,8 +307,8 @@
         private System.Windows.Forms.ListBox kepessegekListBox;
         private System.Windows.Forms.Label labelKepessegLeirasa;
         private System.Windows.Forms.TextBox kepessegLeirasaTextBox;
-        private System.Windows.Forms.Button buttonModisit;
-        private System.Windows.Forms.Button buttonTorol;
+        private System.Windows.Forms.Button buttonKepessegLeirasModosit;
+        private System.Windows.Forms.Button buttonKepessegTorol;
     }
 }
 

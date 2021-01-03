@@ -23,27 +23,19 @@ namespace HarcosokApplication
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            try
-            {
-                DatabaseConnection();
-                sql = conn.CreateCommand();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message + "\nA program leáll.", "Adatbázis kapcsolódási hiba!",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.Close();
-            }
-
+            DatabaseConnection();
             ListHarcosok();
-
+            
             hasznaloComboBox.Text = "Válassz egy harcost...";
             buttonHarcosLetrehozasa.Enabled = false; // Letiltja a Létrehozás gombot, amig nincs név megadva
             kepessegNeveTextBox.Enabled = false; // Letiltja a képesség név bevitelt még nincs kiválasztva egy harcos
             leirasTextBox.Enabled = false; // Letiltja a képesség leírás textbox-ot
             kepessegLeirasaTextBox.Enabled = false; // Letiltja a képesség leírás listbox-ot
+            buttonKepessegLeirasModosit.Enabled = false; // Letiltja a képesség leírás módosít gombot
         }
 
+
+        // ------- Csatlakozás az adatbázishoz -------
 
         private void DatabaseConnection()
         {
@@ -55,7 +47,50 @@ namespace HarcosokApplication
             sb.CharacterSet = "utf8";
 
             conn = new MySqlConnection(sb.ToString());
-            conn.Open();
+
+
+            try
+            {
+                conn.Open();
+                sql = conn.CreateCommand();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message + "\nA program leáll.", "Adatbázis kapcsolódási hiba!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+            }
+            
+            CreateDatabase();
+        }
+
+
+        // ------- Adatbázis táblák létrehozása -------
+
+        private void CreateDatabase()
+        {
+            //sql.CommandText = @"CREATE DATABASE IF NOT EXISTS cs_harcosok; USE cs_harcosok;";
+            //sql.ExecuteNonQuery();
+
+            sql.CommandText = @"CREATE TABLE IF NOT EXISTS `cs_harcosok`.`harcosok` (
+                                `id` INT NOT NULL AUTO_INCREMENT,
+                                `nev` VARCHAR(255) NOT NULL,
+                                `letrehozas` DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                PRIMARY KEY(`id`), UNIQUE(`nev`)) ENGINE = InnoDB;";
+            sql.ExecuteNonQuery();
+
+
+
+
+            sql.CommandText = @"CREATE TABLE IF NOT EXISTS `cs_harcosok`.`kepessegek` (
+    							`id` INT NOT NULL AUTO_INCREMENT,
+    							`nev` VARCHAR(63) NOT NULL,
+    							`leiras` VARCHAR(127) NOT NULL,
+    							`harcos_id` INT NOT NULL , 
+    							PRIMARY KEY(`id`),
+                                FOREIGN KEY(`harcos_id`) REFERENCES harcosok(`id`))
+                                ENGINE = InnoDB;";
+            sql.ExecuteNonQuery();
         }
 
 
@@ -64,6 +99,7 @@ namespace HarcosokApplication
         private void ListHarcosok()
         {
             harcosokListBox.Items.Clear();
+            hasznaloComboBox.Items.Clear();
             sql.CommandText = "SELECT id, nev, letrehozas FROM `harcosok`";
 
             using (MySqlDataReader dr = sql.ExecuteReader())
@@ -87,12 +123,7 @@ namespace HarcosokApplication
         {
             kepessegekListBox.Items.Clear();
             kepessegLeirasaTextBox.Clear();
-
-            if (kepessegekListBox.SelectedIndex < 0)
-            {
-                kepessegLeirasaTextBox.Enabled = true;
-            }
-
+            
             int harcosIndex = harcosokListBox.SelectedIndex + 1;
 
             sql.CommandText = "SELECT id, nev, leiras, harcos_id FROM `kepessegek` WHERE harcos_id = @harcos_index";
@@ -151,6 +182,7 @@ namespace HarcosokApplication
 
             harcosokListBox.Items.Clear(); // Törlöm a harcosokListBox tartalmát
             ListHarcosok(); // majd újra kiolvasom és megjelenítem a harcosokat a listában
+            harcosNeveTextBox.Clear(); // Miután létrejött az új harcos, törli a TextBox tartalmát
         }
 
 
@@ -298,6 +330,17 @@ namespace HarcosokApplication
         private void harcosNeveTextBox_TextChanged(object sender, EventArgs e)
         {
             buttonHarcosLetrehozasa.Enabled = true; // Engedélyezi a buttonHarcosLetrehozasa miután  meg lett adva egy név
+        }
+
+
+        private void kepessegekListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (kepessegekListBox.SelectedIndex != -1)
+            {
+                kepessegLeirasaTextBox.Enabled = true;
+                buttonKepessegLeirasModosit.Enabled = true;
+            }
         }
 
 

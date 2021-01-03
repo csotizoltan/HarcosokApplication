@@ -37,6 +37,11 @@ namespace HarcosokApplication
 
             ListHarcosok();
 
+            hasznaloComboBox.Text = "Válassz egy harcost...";
+            buttonHarcosLetrehozasa.Enabled = false; // Letiltja a Létrehozás gombot, amig nincs név megadva
+            kepessegNeveTextBox.Enabled = false; // Letiltja a képesség név bevitelt még nincs kiválasztva egy harcos
+            leirasTextBox.Enabled = false; // Letiltja a képesség leírás textbox-ot
+            kepessegLeirasaTextBox.Enabled = false; // Letiltja a képesség leírás listbox-ot
         }
 
 
@@ -285,13 +290,14 @@ namespace HarcosokApplication
 
         private void hasznaloComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            kepessegNeveTextBox.Enabled = true; // Engedélyezi a képesség név bevitelt, miután ki lett választva egy harcos neve
+            leirasTextBox.Enabled = true; // Engedélyezi a képesség leírás textbox-ot
         }
 
 
         private void harcosNeveTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            buttonHarcosLetrehozasa.Enabled = true; // Engedélyezi a buttonHarcosLetrehozasa miután  meg lett adva egy név
         }
 
 

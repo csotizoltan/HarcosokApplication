@@ -219,6 +219,8 @@ namespace HarcosokApplication
 
             MessageBox.Show("A(z) " + hasznaloComboBox.SelectedItem.ToString() + " harcoshoz a " +
                 kepessegNeve + " képesség hozzáadva lett.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            kepessegNeveTextBox.Clear(); // Miután létrejött az új képesség, törli a TextBox tartalmát
         }
 
 
